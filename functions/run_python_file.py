@@ -24,3 +24,25 @@ def run_python_file(working_directory, file_path, args=[]):
         return "No output produced"
     
     return f"STDOUT: {completed_process.stdout}\n\nSTDERR: {completed_process.stderr}"
+
+from google.genai import types
+schema_run_python_file = types.FunctionDeclaration(
+    name="run_python_file",
+    description="Runs the provided python script with optional arguments, constrained to the working directory and its subdirectories.",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="The python file to execute, relative to the working directory.",
+            ),"args": types.Schema(
+                type=types.Type.ARRAY,
+                items={
+                    "type":types.Type.STRING
+                    },
+                description="A list of string arguments to provide to the script."
+            )
+        },
+        required=["file_path"]
+    ),
+)

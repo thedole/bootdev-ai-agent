@@ -22,3 +22,18 @@ def get_file_content(working_directory, file_path):
         return f'Error: Processing file "{file_path}" failed.'
 
     return file_content_string
+
+from google.genai import types
+schema_get_file_content = types.FunctionDeclaration(
+    name="get_file_content",
+    description="Reads the contents of the file provided, constrained to the working directory and its subdirectories.",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="The file to read from, relative to the working directory.",
+            ),
+        },
+    ),
+)
