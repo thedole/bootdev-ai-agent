@@ -40,7 +40,7 @@ schema_run_python_file = types.FunctionDeclaration(
                 items={
                     "type":types.Type.STRING
                     },
-                description="A list of string arguments to provide to the script."
+                description="An optional list of string arguments to provide to the script."
             )
         },
         required=["file_path"]
